@@ -1,0 +1,4 @@
+[ERROR] Error executing Maven.
+[ERROR] 1 problem was encountered while building the effective settings
+[FATAL] Non-parseable settings C:\Users\maoyeqin\.m2\settings.xml: expected START_TAG or END_TAG not TEXT (position: TEXT seen ...</proxy>\n    \n  --> \n  </... @106:5)  @ C:\Users\maoyeqin\.m2\settings.xml, line 106, column 5
+

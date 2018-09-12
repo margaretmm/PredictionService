@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <script type="text/javascript" async="" src="./Readymag/entry.js"></script>
+    <script type="text/javascript" async="" src="./Readymag/index.js" id="aplus-sufei"></script>
+    <script type="text/javascript" async="" charset="utf-8" src="./Readymag/core.php"></script>
+    <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-start{border-spacing:1px 1px;-ms-zoom:1.0001;}.ng-animate-active{border-spacing:0px 0px;-ms-zoom:1;}</style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+    <meta name="data-spm" content="5176"></meta>
+
+    <title>性能测试-测试脚本</title>
+
+    <link rel="shortcut icon" href="https://www.aliyun.com/favicon.ico"></link>
+    <link rel="stylesheet" type="text/css" href="./Readymag/bootstrap.css"></link>
+    <link rel="stylesheet" href="./Readymag/font-awesome.css"></link>
+    <link rel="stylesheet" type="text/css" href="./Readymag/angular-growl.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="./Readymag/console1412.css"></link>
+    <link href="./Readymag/k_pts.css" rel="stylesheet"></link>
+
+    <!--[if gt IE 7]><!-->
+    <script src="./Readymag/saved_resource"></script>
+
+    <!--<![endif]-->
+
+    <script>
+        if (!window.console) {
+            console = {
+                log: function (info) {
+                    return false
+                }
+            }
+        }
+        jQuery(function () {
+            jQuery.ajax({
+                method: "GET",
+                url: "/aliyun/notice_info.do",
+                data: {_: new Date().getTime()}
+            })
+                    .done(function (data) {
+                        //console.log(data[0].notice);
+                        jQuery("#notice").html(data[0].notice)
+                    });
+            $(".viewFramework-product-navbar-collapse").on("click", function (e) {
+                //console.log("colapse");
+                paginationWidth = $(".content").width()
+
+                $(".viewFramework-product").toggleClass("viewFramework-product-col-1");
+                var paginationWidth;
+
+                if ($(".viewFramework-product").hasClass("viewFramework-product-col-1")) {
+                    paginationWidth = paginationWidth - 180;
+                }
+                else {
+                    paginationWidth = paginationWidth + 180;
+                }
+                //debugger
+
+                $(".table-fixed").css("width", paginationWidth)
+            })
+            $(".env-expand").on("click", function (e) {
+                var target = $(e.currentTarget);
+                target.parents("li").removeClass("active").toggleClass("expanded");
+                if (target.parents("li").hasClass("expanded")) {
+
+                    target.find(".arrow").removeClass("icon-arrow-right");
+                    target.find(".arrow").addClass("icon-arrow-down")
+                }
+                else {
+                    target.find(".arrow").removeClass("icon-arrow-down");
+                    target.find(".arrow").addClass("icon-arrow-right");
+                    if (target.parents("li").find(".active").length > 0) {
+                        target.parents("li").addClass("active");
+                    }
+                }
+            })
+        })
+    </script>
+
+    <style type="text/css">
+        .bg-warning {
+            background-color: #F2FFEA;
+            padding: 15px;
+            margin-top: 5px;
+        }
+    </style>
+
+</head>
+<body data-spm="2020520153" style="">
+<div class="aliyun-console-topbar" data-spm="101">
+    <div class="topbar-wrap topbar-clearfix" data-spm-anchor-id="5176.2020520153.101.i0.2ba39a8fDTcn62">
+        <div class="topbar-head topbar-left">
+            <a href="http://www.aliyun.com/" target="_blank" class="topbar-logo topbar-left" data-spm-click="gostr=/aliyun;locaid=d1">
+            <span class="icon-logo1 icon-logo-new"></span>
+            </a>
+            <a href="http://home.console.aliyun.com/" target="_self" class="topbar-home-link topbar-btn topbar-left" data-spm-click="gostr=/aliyun;locaid=d2">
+            <span>管理控制台</span>
+            </a>
+        </div>
+        <div class="topbar-nav topbar-left dropdown">
+
+        </div>
+    </div>
+
+    <div style="position: fixed;top: 0px;;left:0px;right:0px;height:50px;background-color: #09C;"></div>
+    <div class="viewFramework-product viewFramework-product-col-1">
+        <div class="viewFramework-product-navbar">
+            <!--product nav-->
+            <div class="product-nav-stage product-nav-stage-main">
+                <div class="product-nav-scene product-nav-main-scene">
+                    <div class="product-nav-title"></div>
+                        <img src="./Readymag/pts-2.png" style="width: 25px;"></img>
+                        PTS基础版
+                    </div>
+                    <div class="product-nav-list">
+                        <ul class="top-level">
+                            <li>
+                                <a href="https://pts.aliyun.com/aliyun/overview.htm">
+                                    <div class="nav-icon"></div>
+
+                                    <div class="nav-title">概览</div>
+                                </a>
+                            </li>
+                            <li class="expandable expanded">
+                                <a class="env-expand">
+                                    <div class="nav-icon">
+			                    	<span class="arrow icon-arrow-down">
+			                    	</span>
+                                    </div>
+                                    <div class="nav-title">测试脚本</div>
+                                </a>
+                                <ul id="ul_sub-level" class="sub-level">
+                                    <li class="active">
+                                        <a href="https://pts.aliyun.com/aliyun/script.htm">
+                                            <div class="nav-icon"></div>
+                                            <div class="nav-title">脚本</div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://pts.aliyun.com/aliyun/script_template.htm">
+                                            <div class="nav-icon"></div>
+                                            <div class="nav-title">脚本模块</div>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            <li>
+                                <a href="https://pts.aliyun.com/aliyun/task.htm">
+                                    <div class="nav-icon"></div>
+                                    <div class="nav-title">测试场景</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://pts.aliyun.com/aliyun/monitorListView.htm">
+                                    <div class="nav-icon"></div>
+                                    <div class="nav-title">监控集</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://pts.aliyun.com/aliyun/result.htm">
+                                    <div class="nav-icon"></div>
+                                    <div class="nav-title">测试报告</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="viewFramework-product-navbar-collapse ng-scope">
+            <div class="product-navbar-collapse-inner">
+                <div class="product-navbar-collapse-bg"></div>
+                <div class="product-navbar-collapse">
+                    <span class="icon-collapse-left"></span>
+                    <span class="icon-collapse-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="viewFramework-product-body">
+            <div class="container ng-scope" id="scriptListControl" ng-controller="scriptListControl">
+                <div class="console-global-notice">
+                    <div class="console-global-notice-list" style="height:40px">
+                        <div class="alert alert-success console-global-notice-items" style="padding: 11px 12px;border: none; box-shadow: 0px 0px 0px #f5f5f5; -webkit-box-shadow: 0px 0px 0px #f5f5f5;">
+                            <div class="clearfix console-global-notice-item-inner">
+
+                                <div class="console-global-notice-content ng-binding">
+                                    <div id="notice">
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+    var scriptListApi="/aliyun/script_list.do";
+	var taskUrl="/aliyun/task.htm";
+</script>
+                <div class="console-title clearfix" data-spm="103" data-spm-anchor-id="5176.2020520153.0.i103.2ba39a8fCWcFjg">
+                    <div class="pull-left">
+                        <h5>测试脚本列表</h5>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default btn-refresh" ng-click="reload()">
+                            <span class="glyphicon glyphicon-refresh"></span>刷新
+                        </button>
+                        <a class="btn btn-primary openparent" href="https://pts.aliyun.com/aliyun/script_new.htm" aliyun-console-spm="001">新增脚本</a>
+                    </div>
+                </div>
+                <input name="_tb_token_" type="hidden" value="BBesJEfNr"></input>
+
+                <div class="btn-group clearfix">
+                    <div class="pull-left">
+                        <form class="form-inline ng-pristine ng-valid">
+                            <div class="form-group">
+                                <input type="text" size="48" ng-model="searchName" class="form-control ng-pristine ng-valid" placeholder="搜索脚本名" ng-keyup="keyup($event)"></input>
+                            </div>
+                            <button type="button" class="btn btn-default" ng-click="search()">搜索</button>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                <div class="content  clearfix" data-spm-anchor-id="5176.2020520153.0.i0.2ba39a8fCWcFjg">
+                    <table class="table table-hover" style="margin-bottom: 57px;" data-spm="103">
+                        <thead>
+                        <tr>
+                            <th>
+                                <div class="dropdown">
+                                    <a href="https://pts.aliyun.com/aliyun/script.htm?spm=5176.2020520153.0.0.19d4f169hs2kpZ#" class="dropdown-toggle" data-toggle="dropdown">ID<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="min-width:100px">
+
+                                        <li><a href="javascript:" data-name="id" data-type="up" ng-click="sorting($event)">升序</a></li>
+                                        <li><a href="javascript:" data-name="id" data-type="down" ng-click="sorting($event)">降序</a></li>
+                                        <li><a href="javascript:" data-name="" data-type="" ng-click="sorting($event)">默认排序</a></li>
+                                    </ul>
+                                </div>
+                            </th>
+                            <th width="250">
+                                <div class="dropdown">
+                                    <a href="https://pts.aliyun.com/aliyun/script.htm?spm=5176.2020520153.0.0.19d4f169hs2kpZ#" class="dropdown-toggle" data-toggle="dropdown">脚本名<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="min-width:100px">
+
+                                        <li><a href="javascript:" data-name="name" data-type="up" ng-click="sorting($event)">升序</a></li>
+                                        <li><a href="javascript:" data-name="name" data-type="down" ng-click="sorting($event)">降序</a></li>
+                                        <li><a href="javascript:" data-name="name" data-type="" ng-click="sorting($event)">默认排序</a></li>
+                                    </ul>
+                                </div>
+                            </th>
+
+                            <th>
+                                <div class="dropdown">
+                                    <a href="https://pts.aliyun.com/aliyun/script.htm?spm=5176.2020520153.0.0.19d4f169hs2kpZ#" class="dropdown-toggle" data-toggle="dropdown">脚本状态<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="min-width:100px">
+                                        <li><a href="javascript:" data-name="scriptStatus" data-type="" ng-click="searchStatus($event)">全部</a></li>
+                                        <li><a href="javascript:" data-name="scriptStatus" data-type="DONE" ng-click="searchStatus($event)">成功</a></li>
+                                        <li><a href="javascript:" data-name="scriptStatus" data-type="FAILED" ng-click="searchStatus($event)">失败</a></li>
+                                        <li><a href="javascript:" data-name="scriptStatus" data-type="DEFAULT" ng-click="searchStatus($event)">使用中</a></li>
+                                        <li><a href="javascript:" data-name="scriptStatus" data-type="CREATING" ng-click="searchStatus($event)">创建中</a></li>
+                                    </ul>
+                                </div>
+                            </th>
+                            <th>创建时间</th>
+                            <th>最后修改时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <!-- ngIf: !loadingState -->
+                    </table>
+                    <table class="table table-fixed" style="margin: 0px; z-index: 99; width: 1530px; position: fixed; bottom: 0px;">
+                        <tfoot>
+                        <tr>
+                            <td> <div id="list-pagination" class="text-right"></div>
+
+                            </td>
+                        </tr>
+                        </tfoot>
+
+                    </table>
+
+
+                    <div class="no-date ng-hide" style="display:none" ng-show="listNone" id="no-data">
+                        暂无相关数据
+                    </div>
+                    <!-- ngIf: loadingState --><div class="no-date ng-scope" ng-if="loadingState" size="48" style="margin-top:300px" loading=""><div class="spinner" role="progressbar" style="position: absolute; width: 0px; z-index: 99; left: 50%; top: 50%;"><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-0-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(0deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-1-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(36deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-2-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(72deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-3-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(108deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-4-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(144deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-5-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(180deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-6-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(216deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-7-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(252deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-8-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(288deg) translate(13px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-100-25-9-10 1s linear infinite;"><div style="position: absolute; width: 11px; height: 5px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(324deg) translate(13px, 0px); border-radius: 2px;"></div></div></div>
+
+                </div><!-- end ngIf: loadingState -->
+                </div>
+
+                <!--实时监控end-->
+
+
+
+                <div class="modal fade" ng-class="{in:animate}" id="fastDialog" ng-style="fastStartStyle">
+                    <div class="modal-dialog" style="width:700px;height:450px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-model="fastStart" ng-click="closeDailog($event)">×</button>
+                                <div><h4 class="modal-title pull-left">快速启动</h4>
+                                    <div style="color:#999;line-height:25px;padding-left: 74px;">
+                                        (请通过配置场景来获取更多的压力模型和监控指标)
+                                    </div></div>
+                            </div>
+                            <form class="form-content ng-pristine ng-valid" id="fastScriptForm" method="post">
+
+                                <div class="modal-body">
+                                    <div id="fast-run-error" class="text-left alert-danger alert-danger-console ng-hide" ng-show="fastRunErrorList">
+                                        <!-- ngRepeat: error in fastRunErrorList -->
+                                    </div>
+
+
+                                    <div class="form-group clearfix" style="position:relative;margin-left:-20px;margin-bottom:0px;margin-top:0px">
+                                        <label class="legend pull-left" style="margin-right:5px;position:relative;color:#666666;width:230px">执行时间：</label>
+                                        <p class="" style="margin-top:4px;color:#333">10分钟</p>
+                                    </div>
+
+                                    <div class="form-group clearfix" style="position:relative;margin-left:-20px;margin-bottom:0px;">
+                                        <label class="legend pull-left" style="margin-top:0px;margin-right:5px;position:relative;color:#666666;width:230px">并发用户数：</label>
+                                        <input type="text" class="form-control ng-pristine ng-valid" ng-model="vuser" name="vUserNum" style="width:200px" max="2000" ng-change="changeInput()"></input>
+                                        <span id="vUserNumError" style="position:relative;color:red;margin-left:-30px;margin-top:0px;"></span>
+                                        <input type="hidden" name="scriptId" id="fastScriptId" max="100" ng-model="scriptId" value="" class="ng-pristine ng-valid"></input>
+                                    </div>
+                                    <div class="form-group clearfix" style="position:relative;margin-left:-20px;margin-bottom:0px;">
+                                        <label class="legend pull-left" style="margin-top:0px;margin-right:5px;position:relative;color:#666666;width:230px">施压集群：</label>
+                                        <select class="form-control ng-pristine ng-valid" style="width:200px" id="clusterName" ng-model="clusterName"><option value="? undefined:undefined ?"></option>
+                                            <!-- ngRepeat: clusterName in clusterNames.data -->
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <div class="pull-left  " style="color: #f68300;">
+                                        <span class="icon-info-2" style="padding-right:5px"></span>
+                                        <span style="color:#999">您剩余包月额度<span style="color:#f68300;" class="ng-binding">0</span>VUM，</span>
+                                        <span style="color:#999" class="ng-binding">本次消耗0VUM，预估包月外费用<span style="color:#f68300;" class="ng-binding"></span>元</span>
+                                    </div>
+
+                                    <button type="submit" id="fastScriptSubmit" class="btn btn-primary" ng-click="fastStartScript($event)">确定</button>
+                                    <button type="button" class="btn btn-default" data-model="fastStart" ng-click="closeDailog($event)">取消</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+    window.SIDEBAR_CONFIG = {
+        appendNode: ".viewFramework-sidebar",
+        productId: "pts"
+    };
+</script>
+    <script src="./Readymag/jquery-sidebar.js"></script>
+    <script src="./Readymag/jquery-topbar.js"></script>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1253091651'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/q_stat.php%3Fid%3D1253091651' type='text/javascript'%3E%3C/script%3E"));</script>
+    <span id="cnzz_stat_icon_1253091651"></span>
+    <script src="./Readymag/q_stat.php" type="text/javascript"></script>
+
+<iframe src="./Readymag/blk.html" id="_oid_ifr_" style="width: 0px; height: 0px; display: none;"></iframe>
+</body>
+</html>
