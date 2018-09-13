@@ -1,24 +1,29 @@
 package controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Calendar;
+import org.springframework.web.bind.annotation.*;
+import runnable.HbaseSendRunable;
 
-@Controller
-@RequestMapping("/")
+
+@RestController
 public class IndexController {
-    //@RequestMapping("/index")
     @GetMapping("/index")
     String index(){
         return "Readymag";
     }
 
+    @GetMapping("/thead")
+    String index2(){
+        int threadNum=2;
+        String startDay="20180506";
+        String endDay="20180808";
+        int daynums=30;
+
+        for(int i=0;i< threadNum; i++) {
+            Thread thread = new Thread(new HbaseSendRunable(startDay, endDay, daynums));
+            thread.start();
+        }
+        return "OK";
+    }
 
 }
