@@ -22,7 +22,7 @@ public class HbaseSendRunable implements Runnable  {
     }
 
     public void run() {
-        //System.out.println("MyRunnable running");
+        System.out.println("MyRunnable running");
     }
 
 

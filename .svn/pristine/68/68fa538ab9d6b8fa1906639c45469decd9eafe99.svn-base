@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+
+    <style type="text/css">
+        .bg-warning {
+            background-color: #F2FFEA;
+            padding: 15px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+</div>
+</body>
+</html>
