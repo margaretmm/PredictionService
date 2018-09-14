@@ -6,6 +6,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import utils.FileHander;
 
+/**
+ * create by: maoyeqin
+ * description:
+ * create time: 17:48 2018/7/17
+ *
+ * @Param: null
+ * @return
+ */
 @RestController
 public class MonitorController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -15,14 +23,6 @@ public class MonitorController {
         return "monitor";
     }
 
-    /**
-     * create by: maoyeqin
-     * description:
-     * create time: 17:48 2018/7/17
-     * 
-      * @Param: null
-     * @return 
-     */
     @PostMapping("/downloadImg")
     String downloadImg(HttpServletRequest request) {
         String ip = FileHander.getRemoteIp(request);
