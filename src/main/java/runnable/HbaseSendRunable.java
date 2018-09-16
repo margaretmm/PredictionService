@@ -2,8 +2,12 @@ package runnable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.KeyValueForDate;
 
 import java.util.*;
+
+import static utils.SplitDateUtil.SplitDateByThreadNum;
+import static utils.SplitDateUtil.daycount;
 
 /**
  * @ Author     ：maoyeqin
@@ -27,13 +31,24 @@ public class HbaseSendRunable implements Runnable  {
 
 
     public static void main(String[] args){
-        int threadNum=Integer.valueOf(args[1]).intValue();
-        String startDay=args[2];
-        String endDay=args[3];
-        int daynums=Integer.valueOf(args[4]).intValue();
+        //int threadNum=Integer.valueOf(args[1]).intValue();
+        //String startDay=args[2];
+        //String endDay=args[3];
+        //int daynums=Integer.valueOf(args[4]).intValue();
+        int threadNum=8;
+        String startDay="2015-08-23";
+        String endDay="2016-06-10";
+        int daynums=350;
+        String iStart=null;
+        String iEnd=null;
+        int iDaynums=0;
 
+        ArrayList<KeyValueForDate> dateList=SplitDateByThreadNum(startDay,endDay,threadNum);
         for(int i=0;i< threadNum; i++) {
-            Thread thread = new Thread(new HbaseSendRunable(startDay, endDay, daynums));
+            iStart=dateList.get(i).getStartDate();
+            iEnd=dateList.get(i).getEndDate();
+            iDaynums= daycount(iStart,iEnd);
+            Thread thread = new Thread(new HbaseSendRunable(iStart, iEnd, iDaynums));
             thread.start();
         }
     }

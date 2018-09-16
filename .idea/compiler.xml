@@ -9,8 +9,5 @@
         <module name="perfTestPlatform" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="perfTestPlatform" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
