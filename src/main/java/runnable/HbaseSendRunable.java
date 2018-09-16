@@ -19,14 +19,27 @@ import static utils.SplitDateUtil.daycount;
 public class HbaseSendRunable implements Runnable  {
     private static final Logger LOGGER = LoggerFactory.getLogger(HbaseSendRunable.class);
     private static Random random = new Random();
+    private String startDay;
+    private String endDay;
+    private int dayCount;
 
-    public HbaseSendRunable(String startDay,String endDay,long dayCount){
+    public HbaseSendRunable(String startDay,String endDay,int dayCount){
          /***/
-         System.out.println("HbaseSendRunable is running");
+        this.startDay=startDay;
+        this.endDay=endDay;
+        this.dayCount=dayCount;
     }
 
+    @Override
     public void run() {
-        //System.out.println("MyRunnable running");
+        int num=2;
+        while(num>0){
+            System.out.println("this.startDay:"+this.startDay);
+            System.out.println("this.endDay:"+this.endDay);
+            System.out.println("this.dayCount:"+this.dayCount);
+            System.out.println(Thread.currentThread().getName()+": "+num);
+            num--;
+        }
     }
 
 
@@ -43,6 +56,7 @@ public class HbaseSendRunable implements Runnable  {
         String iEnd=null;
         int iDaynums=0;
 
+        ArrayList<Thread> aList=new ArrayList<Thread>();
         ArrayList<KeyValueForDate> dateList=SplitDateByThreadNum(startDay,endDay,threadNum);
         for(int i=0;i< threadNum; i++) {
             iStart=dateList.get(i).getStartDate();
@@ -50,7 +64,14 @@ public class HbaseSendRunable implements Runnable  {
             iDaynums= daycount(iStart,iEnd);
             Thread thread = new Thread(new HbaseSendRunable(iStart, iEnd, iDaynums));
             thread.start();
+            System.out.println(thread.getName());
+            aList.add(thread);
         }
+
+//        for (Thread iThread: aList){
+//            iThread.start();
+//            System.out.println(iThread.getName());
+//        }
     }
 
 }
