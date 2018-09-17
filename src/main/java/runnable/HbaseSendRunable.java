@@ -71,10 +71,6 @@ public class HbaseSendRunable implements Runnable  {
             aList.add(thread);
         }
 
-//        for (Thread iThread: aList){
-//            iThread.start();
-//            System.out.println(iThread.getName());
-//        }
     }
 
 }
