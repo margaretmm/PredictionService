@@ -7,12 +7,16 @@ package activemq.p2p;
  * @ Modified By：
  * @Version: $version$
  */
-import javax.jms.*;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQBytesMessage;
+import utils.RarUtil;
 
-import java.nio.ByteBuffer;
+import javax.jms.*;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class QueueReceiver {
 
@@ -65,22 +69,50 @@ public class QueueReceiver {
 
                         }else if (msg  instanceof BytesMessage)
                         {
+                            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");//设置日期格式
+                            String dateTime=df.format(new Date());
+                            System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+
                             System.out.println("------Received BytesMessage------");
-                            BytesMessage message = (BytesMessage) msg;
-                            byte[] byteContent = new byte[1024];
-                            int length = -1;
-                            StringBuffer content = new StringBuffer();
-                            try {
-                                while ((length = message.readBytes(byteContent))!=-1) {
-                                    content.append(new String(byteContent, 0, length));
-                                    System.out.println(new String(byteContent, 0, length));
+                            ActiveMQBytesMessage bytesMessage = (ActiveMQBytesMessage) msg;
+                            if (bytesMessage != null){
+                                byte []bt = new byte[0];
+                                try {
+                                    bt = new byte[(int) bytesMessage.getBodyLength()];
+                                    bytesMessage.readBytes(bt);
+                                    String path=".\\"+dateTime+".rar";
+                                    File tempFile  =new File(path);
+                                    if(!tempFile .exists()){
+                                        tempFile .createNewFile();
+                                    }
+                                    OutputStream os = new FileOutputStream(tempFile.getPath());
+                                    //File fileOut =new File(".\\");
                                     System.out.println("----------end----------------");
+                                    os.write(bt);
+                                    os.close();
+                                    RarUtil.unrar(tempFile.getPath(),  ".\\");
+                                } catch (JMSException e1) {
+                                    e1.printStackTrace();
+                                } catch (FileNotFoundException e1) {
+                                    e1.printStackTrace();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (JMSException e) {
-                                e.printStackTrace();
+
                             }
-
-
+//                            byte[] byteContent = new byte[1024];
+//                            int length = -1;
+//                            StringBuffer content = new StringBuffer();
+//                            try {
+//                                while ((length = message.readBytes(byteContent))!=-1) {
+//                                    content.append(new String(byteContent, 0, length));
+//                                }
+//                                System.out.println(content);
+//                            } catch (JMSException e) {
+//                                e.printStackTrace();
+//                            }
                         }else if (msg  instanceof StreamMessage)
                         {
                             System.out.println("------Received StreamMessage------");
@@ -91,7 +123,6 @@ public class QueueReceiver {
                             } catch (JMSException e) {
                                 e.printStackTrace();
                             }
-
                         }else if (msg  instanceof ObjectMessage)
                         {
                             System.out.println("------Received ObjectMessage------");
@@ -101,9 +132,7 @@ public class QueueReceiver {
                             } catch (JMSException e) {
                                 e.printStackTrace();
                             }
-
                         }
-
                     }
                 }
             });
