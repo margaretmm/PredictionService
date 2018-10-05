@@ -75,6 +75,9 @@ public class SplitDateUtil {
         KeyValueForDate iDate=new KeyValueForDate();
 
         for(i=0;i<threadNum;i++){
+            if(j==listSize){
+                break;
+            }
             tmp=new KeyValueForDate();
             iDate=list.get(j);
             tmp.setStartDate(iDate.getStartDate2());

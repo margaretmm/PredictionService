@@ -62,6 +62,9 @@ public class HbaseSendRunable implements Runnable  {
         ArrayList<Thread> aList=new ArrayList<Thread>();
         ArrayList<KeyValueForDate> dateList=SplitDateByThreadNum(startDay,endDay,threadNum);
         for(int i=0;i< threadNum; i++) {
+            if (i== dateList.size()){
+                    break;
+            }
             iStart=dateList.get(i).getStartDate();
             iEnd=dateList.get(i).getEndDate();
             iDaynums= daycount(iStart,iEnd);
@@ -71,10 +74,6 @@ public class HbaseSendRunable implements Runnable  {
             aList.add(thread);
         }
 
-//        for (Thread iThread: aList){
-//            iThread.start();
-//            System.out.println(iThread.getName());
-//        }
     }
 
 }
