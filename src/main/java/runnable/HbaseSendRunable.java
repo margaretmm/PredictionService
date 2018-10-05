@@ -22,12 +22,14 @@ public class HbaseSendRunable implements Runnable  {
     private String startDay;
     private String endDay;
     private int dayCount;
+    private String HbaseData;
 
-    public HbaseSendRunable(String startDay,String endDay,int dayCount){
+    public HbaseSendRunable(String startDay,String endDay,int dayCount,String HbaseData){
          /***/
         this.startDay=startDay;
         this.endDay=endDay;
         this.dayCount=dayCount;
+        this.HbaseData=HbaseData;
     }
 
     @Override
@@ -38,6 +40,7 @@ public class HbaseSendRunable implements Runnable  {
             System.out.println("this.endDay:"+this.endDay);
             System.out.println("this.dayCount:"+this.dayCount);
             System.out.println(Thread.currentThread().getName()+": "+num);
+            //call hbase API
             num--;
         }
     }
@@ -62,7 +65,7 @@ public class HbaseSendRunable implements Runnable  {
             iStart=dateList.get(i).getStartDate();
             iEnd=dateList.get(i).getEndDate();
             iDaynums= daycount(iStart,iEnd);
-            Thread thread = new Thread(new HbaseSendRunable(iStart, iEnd, iDaynums));
+            Thread thread = new Thread(new HbaseSendRunable(iStart, iEnd, iDaynums,"laalalls"));
             thread.start();
             System.out.println(thread.getName());
             aList.add(thread);
