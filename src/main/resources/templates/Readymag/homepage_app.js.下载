@@ -675,7 +675,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
                 },
                 computed: {
                     bg: function() {
-                        return RM.utils.getRGBA(this.mutableColor, this.showAlpha ? this.opacity100based : 1);
+                        return RM.ai.com.utils.getRGBA(this.mutableColor, this.showAlpha ? this.opacity100based : 1);
                     },
                     opacity100based: function() {
                         return this.mutableAlpha / 100;
@@ -1220,7 +1220,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
                         get: function() {
                             var t, e = this;
                             return t = this.$$el ? this.$$el.data("formatValue")(this.value) : this.value, this.autosize && Vue.nextTick(function() {
-                                RM.utils.setInputSize($(e.$el), 150);
+                                RM.ai.com.utils.setInputSize($(e.$el), 150);
                             }), t;
                         }
                     }
@@ -1243,9 +1243,9 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
                         this.$$el.RMNumericInput({
                             onChange: this.onChange,
                             labelSelector: this.labelSelector
-                        }), this.$$el.data("formatValue")(this.value), this.autosize && RM.utils.setInputSize($(this.$el), 150, this.$$el.val());
+                        }), this.$$el.data("formatValue")(this.value), this.autosize && RM.ai.com.utils.setInputSize($(this.$el), 150, this.$$el.val());
                     }.bind(this);
-                    this.wait ? RM.utils.waitForTransitionEnd(this.$$el, this.wait, "opacity", function() {
+                    this.wait ? RM.ai.com.utils.waitForTransitionEnd(this.$$el, this.wait, "opacity", function() {
                         t();
                     }.bind(this)) : t();
                 },
@@ -1371,10 +1371,10 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
                         return Math.round(100 * this.value);
                     },
                     gradientLeft: function() {
-                        return RM.utils.getRGBA(this.gradientColor, 1);
+                        return RM.ai.com.utils.getRGBA(this.gradientColor, 1);
                     },
                     gradientRight: function() {
-                        return RM.utils.getRGBA(this.gradientColor, 0);
+                        return RM.ai.com.utils.getRGBA(this.gradientColor, 0);
                     }
                 },
                 watch: {
@@ -1995,7 +1995,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
                     },
                     parseStartTime: function(t) {
                         var e, i, n = 0;
-                        return (e = RM.utils.queryUrlGetParam("t", t)) ? (i = e.match(/(\d+)(m?)(\d*)(s?)/), _.isEmpty(i) || !parseInt(i[1], 10) ? null : ("m" == i[2].toLowerCase() ? n += 60 * parseInt(i[1], 10) : n += parseInt(i[1], 10), 
+                        return (e = RM.ai.com.utils.queryUrlGetParam("t", t)) ? (i = e.match(/(\d+)(m?)(\d*)(s?)/), _.isEmpty(i) || !parseInt(i[1], 10) ? null : ("m" == i[2].toLowerCase() ? n += 60 * parseInt(i[1], 10) : n += parseInt(i[1], 10),
                         parseInt(i[3], 10) && (n += parseInt(i[3], 10)), n)) : null;
                     },
                     getVideoFromUrl: function(t) {
@@ -3392,7 +3392,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         render: function() {
             this.setElement(this.$node || $(this.template({})).appendTo(this.$container)), this.disableScrollWatcher = !!this.$node, 
             this.setElement(this.$el), this.rendered = !0;
-            var e = t.utils.queryUrlGetParam("email");
+            var e = t.ai.com.utils.queryUrlGetParam("email");
             e && this.$(".email-input").val(e);
         },
         link: function(t) {
@@ -3461,7 +3461,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
             13 == t.keyCode && this.tryLogin();
         },
         tryLogin: function() {
-            var e = $.trim(this.$(".login.ljr-panel .email-input").val()), i = this.$(".login.ljr-panel .password-input").val(), n = this.$(".login.ljr-panel .go"), o = t.utils.queryUrlGetParam("redirect");
+            var e = $.trim(this.$(".login.ljr-panel .email-input").val()), i = this.$(".login.ljr-panel .password-input").val(), n = this.$(".login.ljr-panel .go"), o = t.ai.com.utils.queryUrlGetParam("redirect");
             n.hasClass("processing") || "" != e && "" != i && (this.showButtonPreloader(n), this.requestLogin(e, i, _.bind(function(e) {
                 if (e && e.redirect) return window.location.href = e.redirect;
                 if (e) {
@@ -3496,9 +3496,9 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
             }, this), 2e3);
         },
         createAccount: function() {
-            var e, i = $.trim(this.$(".join.ljr-panel .fullname-input").val()), n = this.$(".join.ljr-panel .password-input").val(), o = this.$(".join.ljr-panel .email-input").val(), a = [], r = this.$(".join.ljr-panel .go"), s = t.utils.queryUrlGetParam("redirect");
-            r.hasClass("processing") || (s && (e = t.utils.queryUrlGetParam("giftCode", decodeURIComponent(s))), 
-            "" != i && "" != o && "" != n ? (t.utils.isValidEmail(o) || a.push(this.ERROR_MESSAGES.invalid_email), 
+            var e, i = $.trim(this.$(".join.ljr-panel .fullname-input").val()), n = this.$(".join.ljr-panel .password-input").val(), o = this.$(".join.ljr-panel .email-input").val(), a = [], r = this.$(".join.ljr-panel .go"), s = t.ai.com.utils.queryUrlGetParam("redirect");
+            r.hasClass("processing") || (s && (e = t.ai.com.utils.queryUrlGetParam("giftCode", decodeURIComponent(s))),
+            "" != i && "" != o && "" != n ? (t.ai.com.utils.isValidEmail(o) || a.push(this.ERROR_MESSAGES.invalid_email),
             n.length < 6 && a.push(this.ERROR_MESSAGES.short_password), this.router.analytics && this.router.analytics.sendEvent("Join Button Click", {
                 label: "native",
                 value: a.length,
@@ -3534,7 +3534,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         },
         sendRecoverRequest: function() {
             var e = this.$(".recover.ljr-panel .email-input").val(), i = this.$(".recover.ljr-panel .go");
-            i.hasClass("processing") || t.utils.isValidEmail(e) && (this.showButtonPreloader(i), this.requestRecover(e, _.bind(function(t) {
+            i.hasClass("processing") || t.ai.com.utils.isValidEmail(e) && (this.showButtonPreloader(i), this.requestRecover(e, _.bind(function(t) {
                 this.hideButtonPreloader(i), this.$(".recover.ljr-panel").addClass("request-sended");
             }, this)));
         },
@@ -3577,7 +3577,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         },
         onPasswordInput: function(e) {
             var i = $(e.currentTarget);
-            t.utils.filterNonAscii(i) && (i.addClass("error-input"), _.defer(_.bind(function() {
+            t.ai.com.utils.filterNonAscii(i) && (i.addClass("error-input"), _.defer(_.bind(function() {
                 i.removeClass("error-input");
             }, this)));
         },
@@ -3606,7 +3606,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
             var i;
             if (e.user.createdViaFacebook && (i = "facebook"), e.user.createdViaGoogle && (i = "google"), i) this.putStorageData(i), 
             this.redirectAfterJoin(e.user.uri, this.$button); else {
-                var n = t.utils.queryUrlGetParam("redirect");
+                var n = t.ai.com.utils.queryUrlGetParam("redirect");
                 if (n) return window.location.href = t.constants.readymag_auth_host + n;
                 window.location.href = t.constants.readymag_auth_host + "/" + e.user.uri;
             }
@@ -3621,7 +3621,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         redirectAfterJoin: function(e) {
             var i = _.isFunction(this.joinCallback) ? 500 : 0;
             _.isFunction(this.joinCallback) && this.joinCallback();
-            var n = t.utils.queryUrlGetParam("redirect");
+            var n = t.ai.com.utils.queryUrlGetParam("redirect");
             if (n) return window.location.href = t.constants.readymag_auth_host + n;
             setTimeout(_.bind(function() {
                 if (!Modernizr.isdesktop || Modernizr.msie || Modernizr.msie11) window.location.href = t.constants.readymag_auth_host + "/" + e + "/"; else {
@@ -3670,11 +3670,11 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         },
         putStorageData: function(e) {
             var i = {}, n = new Date();
-            i.type = e, i.utm_campaign = t.utils.queryUrlGetParam("utm_campaign"), i.utm_source = t.utils.queryUrlGetParam("utm_source"), 
-            i.utm_medium = t.utils.queryUrlGetParam("utm_medium"), i.rm_url = window.location.href, i.rm_referrer = document.referrer, 
-            i.timestamp = n.valueOf(), i._ga = t.utils.getCookie("_ga");
+            i.type = e, i.utm_campaign = t.ai.com.utils.queryUrlGetParam("utm_campaign"), i.utm_source = t.ai.com.utils.queryUrlGetParam("utm_source"),
+            i.utm_medium = t.ai.com.utils.queryUrlGetParam("utm_medium"), i.rm_url = window.location.href, i.rm_referrer = document.referrer,
+            i.timestamp = n.valueOf(), i._ga = t.ai.com.utils.getCookie("_ga");
             var o = btoa(JSON.stringify(i));
-            t.utils.createCookie("send_join_event", o, 10);
+            t.ai.com.utils.createCookie("send_join_event", o, 10);
         }
     });
 }(RM), "undefined" == typeof RM && (RM = {}), function(t) {
@@ -3690,7 +3690,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         EMBED_SCRIPT_MAIN: window.ServerData.config.readymag_host + "/specials/assets/embed_main.js",
         IS_LIVE: !(!window.ServerData || !window.ServerData.stripe_live),
         IS_FILE_PROTOCOL: "file:" == window.location.protocol
-    }, window.ServerData.config), t.utils = {
+    }, window.ServerData.config), t.ai.com.utils = {
         picSizes: [ 256, 304, 512, 608, 1024 ],
         isPageNativelyScaled: function() {
             return window.innerWidth != document.documentElement.clientWidth;
@@ -3722,7 +3722,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
             return e || (t = t.replace(/^\s+|\s+$/g, "")), /^([a-z0-9_\-]+[\.\+])*[a-z0-9_\-]+@([a-z0-9][a-z0-9\-]*[a-z0-9]\.)+[a-z]{2,}$/i.test(t);
         },
         isValidEmailLink: function(e) {
-            return t.utils.isValidEmail(e.split("?")[0]);
+            return t.ai.com.utils.isValidEmail(e.split("?")[0]);
         },
         getRGBA: function(t, e) {
             var i = "";
@@ -3761,7 +3761,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         },
         plainTextToHtml: function(e, i) {
             return e = e || "", e = e.replace(/\&/gim, "&amp;"), e = e.replace(/\</gim, "&lt;"), e = e.replace(/\>/gim, "&gt;"), 
-            e = e.replace(/\n/gim, "<br/>"), e = e.replace(/\s\s/gim, " &nbsp;"), i && i.detectLinks && (e = t.utils.scanForURIs(e)), 
+            e = e.replace(/\n/gim, "<br/>"), e = e.replace(/\s\s/gim, " &nbsp;"), i && i.detectLinks && (e = t.ai.com.utils.scanForURIs(e)),
             e;
         },
         screenshotSize: function(t) {
@@ -3831,7 +3831,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         vueTransitionsShow: function(e, i) {
             var n = i + "-enter", o = i + "-enter-active";
             e.addClass(n), window.requestAnimationFrame(function() {
-                e.removeClass(n), e.addClass(o), t.utils.waitForTransitionEnd(e, 200, "opacity", function() {
+                e.removeClass(n), e.addClass(o), t.ai.com.utils.waitForTransitionEnd(e, 200, "opacity", function() {
                     e.removeClass(o);
                 });
             });
@@ -3839,7 +3839,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         vueTransitionsHide: function(e, i) {
             var n = i + "-leave-to", o = i + "-leave-active";
             return e.addClass(n + " " + o), new window.Promise(function(i) {
-                t.utils.waitForTransitionEnd(e, 200, "opacity", i);
+                t.ai.com.utils.waitForTransitionEnd(e, 200, "opacity", i);
             }).then(function() {
                 e.removeClass(n + " " + o);
             });
@@ -3885,9 +3885,9 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         loadLoggedUser: function(e) {
             if (t.common.isDownloadedSource) return e && e();
             if (window.ServerData && window.ServerData.me && window.ServerData.me.user) return e && e();
-            if (t.utils.__loadLoggedUserCallbackStack = t.utils.__loadLoggedUserCallbackStack || [], e && "function" == typeof e && t.utils.__loadLoggedUserCallbackStack.push(e), 
-            !t.utils.__loadLoggedUserLoadStarted) {
-                t.utils.__loadLoggedUserLoadStarted = !0, $(window).on("message", _.bind(function(e) {
+            if (t.ai.com.utils.__loadLoggedUserCallbackStack = t.ai.com.utils.__loadLoggedUserCallbackStack || [], e && "function" == typeof e && t.ai.com.utils.__loadLoggedUserCallbackStack.push(e),
+            !t.ai.com.utils.__loadLoggedUserLoadStarted) {
+                t.ai.com.utils.__loadLoggedUserLoadStarted = !0, $(window).on("message", _.bind(function(e) {
                     if ((e = e.originalEvent || {}).origin == t.constants.readymag_auth_host) {
                         var n = JSON.parse(e.data);
                         if ("user" != n.event) return;
@@ -3895,8 +3895,8 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
                         window.ServerData && (window.ServerData.me = {
                             user: o
                         });
-                        for (var a = 0; a < t.utils.__loadLoggedUserCallbackStack.length; a++) t.utils.__loadLoggedUserCallbackStack[a].call(this, o);
-                        t.utils.__loadLoggedUserCallbackStack = null, t.utils.__loadLoggedUserLoadStarted = null, i.remove();
+                        for (var a = 0; a < t.ai.com.utils.__loadLoggedUserCallbackStack.length; a++) t.ai.com.utils.__loadLoggedUserCallbackStack[a].call(this, o);
+                        t.ai.com.utils.__loadLoggedUserCallbackStack = null, t.ai.com.utils.__loadLoggedUserLoadStarted = null, i.remove();
                     }
                 }, this));
                 var i = $("<iframe>").attr("width", "0").attr("height", "0").css({
@@ -4165,8 +4165,8 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
     t.classes.extendAnalyticsPublic = {
         initialize: function(e) {
             _.bindAll(this), _.extend(this, e), this.router || (this.router = t.viewerRouter || t.homepageRouter || t.collectorRouter), 
-            this.lastTrackedUrl = "", this.shortlink_redirect = t.utils.getCookie("shortlink_redirect"), this._saveFirstInteraction(), 
-            t.common.readymagTracker && t.utils.loadLoggedUser(_.bind(function(t) {
+            this.lastTrackedUrl = "", this.shortlink_redirect = t.ai.com.utils.getCookie("shortlink_redirect"), this._saveFirstInteraction(),
+            t.common.readymagTracker && t.ai.com.utils.loadLoggedUser(_.bind(function(t) {
                 t._id && (window.ga && ga("readymag.set", "&uid", t._id), this.userId = t._id);
             }, this)), $(_.bind(function() {
                 this.trackPage();
@@ -4243,7 +4243,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
         _processRedirectUTM: function() {
             if (this.shortlink_redirect) {
                 var e = JSON.parse(atob(this.shortlink_redirect));
-                return t.utils.deleteCookie("shortlink_redirect"), {
+                return t.ai.com.utils.deleteCookie("shortlink_redirect"), {
                     campaignName: e.utm_campaign,
                     campaignSource: e.utm_source,
                     campaignMedium: e.utm_medium
@@ -4251,8 +4251,8 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
             }
         },
         _saveFirstInteraction: function() {
-            if (!(t.utils.getCookie("_rmdata") || Modernizr.localstorage && window.localStorage && window.localStorage.getItem("_rmdata"))) {
-                var e = document.referrer || "direct", i = window.location.href, n = t.utils.queryUrlGetParam("utm_campaign"), o = t.utils.queryUrlGetParam("utm_source"), a = t.utils.queryUrlGetParam("utm_medium"), r = {
+            if (!(t.ai.com.utils.getCookie("_rmdata") || Modernizr.localstorage && window.localStorage && window.localStorage.getItem("_rmdata"))) {
+                var e = document.referrer || "direct", i = window.location.href, n = t.ai.com.utils.queryUrlGetParam("utm_campaign"), o = t.ai.com.utils.queryUrlGetParam("utm_source"), a = t.ai.com.utils.queryUrlGetParam("utm_medium"), r = {
                     dimension: [ n, o, a, e, i ].join("|"),
                     first_medium: a,
                     first_campaign: n,
@@ -4260,7 +4260,7 @@ var _typeof = "function" == typeof Symbol && "symbol" === _typeof2(Symbol.iterat
                     rm_url: i,
                     rm_referrer: e
                 }, s = btoa(JSON.stringify(r));
-                this._rmdata = r, t.utils.createCookie("_rmdata", s), Modernizr.localstorage && window.localStorage && window.localStorage.setItem("_rmdata", s);
+                this._rmdata = r, t.ai.com.utils.createCookie("_rmdata", s), Modernizr.localstorage && window.localStorage && window.localStorage.setItem("_rmdata", s);
             }
         },
         getActionCategory: function(e) {
@@ -4501,7 +4501,7 @@ var preloadDesignImagesList = {
             var i, n = this.get("pic");
             if (Modernizr.retina && (e *= 2), e = _.find(this.userpic_sizes, function(t) {
                 return t >= e;
-            }), n) return 0 == (n = t.utils.addFilenameComponent(n, e)).indexOf("https://") || t.common.isDownloadedSource ? n : (-1 == n.indexOf("/api/upload/") && (n = "/api/upload/" + n), 
+            }), n) return 0 == (n = t.ai.com.utils.addFilenameComponent(n, e)).indexOf("https://") || t.common.isDownloadedSource ? n : (-1 == n.indexOf("/api/upload/") && (n = "/api/upload/" + n),
             n);
             i = this.get("name").match(/^[a-z0-9]{1}/i);
             var o = t.common.isDownloadedSource ? "" : "/";
@@ -4515,7 +4515,7 @@ var preloadDesignImagesList = {
                 link: "",
                 label: ""
             };
-            return this.get("website") && ((e = t.utils.URLParts(this.get("website"))).protocol = e.protocol || "http://", 
+            return this.get("website") && ((e = t.ai.com.utils.URLParts(this.get("website"))).protocol = e.protocol || "http://",
             i.link = e.protocol + e.hostname + e.path, i.label = e.hostname), i;
         },
         getTwitterButified: function() {
@@ -4523,7 +4523,7 @@ var preloadDesignImagesList = {
                 link: "",
                 nick: ""
             };
-            return this.get("twitter") && ((e = t.utils.URLParts(this.get("twitter"))).protocol || e.path ? (e.protocol = e.protocol || "http://", 
+            return this.get("twitter") && ((e = t.ai.com.utils.URLParts(this.get("twitter"))).protocol || e.path ? (e.protocol = e.protocol || "http://",
             i.nick = e.path.split("/")[1]) : (e.protocol = "http://", i.nick = e.hostname, e.path = "/" + i.nick, 
             e.hostname = "twitter.com"), i.link = e.protocol + e.hostname + e.path), i;
         },
@@ -4533,7 +4533,7 @@ var preloadDesignImagesList = {
                 nick: ""
             };
             if (this.get("fb")) {
-                e = t.utils.URLParts(this.get("fb"));
+                e = t.ai.com.utils.URLParts(this.get("fb"));
                 try {
                     -1 != e.path.indexOf("profile.php") ? i.nick = "facebook" : "pages" == e.path.split("/")[1] ? i.nick = decodeURIComponent(e.path.split("/")[2]) || "" : e.protocol || e.path ? i.nick = e.path.split("/")[1].split("?")[0] || "" : (i.nick = e.hostname, 
                     e.hostname = "facebook.com", e.path = "/" + i.nick), e.protocol = e.protocol || "http://", i.link = e.protocol + e.hostname + e.path;
@@ -4962,7 +4962,7 @@ var preloadDesignImagesList = {
             return Backbone.Router.apply(this, arguments), this;
         },
         initialize: function() {
-            _.bindAll(this), this.userLoaded = !1, t.utils.loadLoggedUser(this.onLoadLoggedUser), this.on("route", this.onRoute), 
+            _.bindAll(this), this.userLoaded = !1, t.ai.com.utils.loadLoggedUser(this.onLoadLoggedUser), this.on("route", this.onRoute),
             Modernizr.isboxversion || (this.homepage = new t.classes.Homepage({
                 router: this
             })), this.homepage && this.homepage.render($("body")), this.createLoginForm(), t.analytics = t.analytics || new t.classes.Analytics({
@@ -5030,7 +5030,7 @@ var preloadDesignImagesList = {
         loginRoute: function() {
             if (!this.userLoaded) return this.once("user_loaded", this.loginRoute);
             if (this.userModel) {
-                var e = t.utils.queryUrlGetParam("redirect");
+                var e = t.ai.com.utils.queryUrlGetParam("redirect");
                 window.location.href = e || t.constants.readymag_auth_host + "/" + this.userModel.get("uri") + "/";
             } else this.showLoginForm("login");
         },
@@ -5043,7 +5043,7 @@ var preloadDesignImagesList = {
         join: function() {
             if (!this.userLoaded) return this.once("user_loaded", this.join);
             if (this.userModel) {
-                var e = t.utils.queryUrlGetParam("redirect");
+                var e = t.ai.com.utils.queryUrlGetParam("redirect");
                 window.location.href = e || t.constants.readymag_auth_host + "/" + this.userModel.get("uri") + "/";
             } else this.showLoginForm("join");
         },
@@ -5599,7 +5599,7 @@ var preloadDesignImagesList = {
             delete this.sliderIniTouch, delete this.sliderSwipeShift;
         },
         sliderShift: function(e, i, n) {
-            e.toggleClass("no-animation", !n), t.utils.applyTransform(e, "translate3d(" + i + "px, 0, 0)"), this.tourMagsCheckArrows();
+            e.toggleClass("no-animation", !n), t.ai.com.utils.applyTransform(e, "translate3d(" + i + "px, 0, 0)"), this.tourMagsCheckArrows();
         },
         tourMagsCheckArrows: function() {
             var t = this.$(".tour-wrapper .top-block .mags-list.active"), e = (e = t[0].style.cssText.match(/translate3d\((.*?)px.*\)/)) && e.length ? -e[1] : 0, i = t.attr("data-max") - 0;
@@ -5749,7 +5749,7 @@ var preloadDesignImagesList = {
         },
         validateEduForm: function() {
             var e = this.$(".edu-wrapper .edu-email").val().trim(), i = this.$(".edu-wrapper .fake-file").val().trim();
-            this.$(".edu-wrapper .send-request").toggleClass("disabled", !(t.utils.isValidEmail(e) && i));
+            this.$(".edu-wrapper .send-request").toggleClass("disabled", !(t.ai.com.utils.isValidEmail(e) && i));
         },
         showMobilePopupWarning: function() {
             if (t.classes.Alert) {
