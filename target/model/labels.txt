@@ -1,3 +1,0 @@
-blackscreen
-normalscreen
-other
