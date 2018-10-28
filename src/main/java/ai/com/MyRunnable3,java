@@ -1,0 +1,55 @@
+package ai.com.hik.runnable.ThreadTest;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * @ Author     ：maoyeqin
+ * @ Date       ：Created in 10:23 2018/10/23
+ * @ Description：${description}
+ * @ Modified By：
+ * @Version: $version$
+ */
+public class MyRunnable3 implements Runnable {
+    CountDownLatch latch = null;
+    int i;
+    final static Object object=new Object();
+
+    public MyRunnable3(CountDownLatch latch, int i) {
+        this.latch = latch;
+        this.i = i;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Thread t = Thread.currentThread();
+            System.err.println(t.getName()+ " --线程 " + i +" 完成了操作...");
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        synchronized (object) {
+            latch.countDown();
+        }
+        System.out.println("await.getCount(): "+latch.getCount());
+    }
+
+
+    public static void main(String[] args) throws InterruptedException {
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(5, 10, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(5));
+        int count = 10;
+        final CountDownLatch latch = new CountDownLatch(count);
+
+        for (int i = 0; i < count; i++) {
+            threadPool.execute(new MyRunnable3(latch, i));
+        }
+
+        latch.await();
+        System.err.println("等待线程被唤醒！");
+        threadPool.shutdown();
+    }
+
+}
