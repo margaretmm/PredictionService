@@ -1,0 +1,32 @@
+package ai.com.controllers;
+
+
+import ai.com.hik.utils.FileHander;
+import ai.com.hik.zookeeper.ConfigManager;
+import ai.com.hik.zookeeper.ZkClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+
+
+@RestController
+public class AiController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private ZkClient zkClient ;
+
+    @PostMapping("/v1/aiConfig")
+    void aiConfig(HttpServletRequest request) {
+        String ip = FileHander.getRemoteIp(request);
+        String serverType=request.getParameter("serverType");
+        ConfigManager manager = new ConfigManager(zkClient.getZookeeperServer(),true);
+        manager.add(serverType);
+    }
+
+
+
+}
