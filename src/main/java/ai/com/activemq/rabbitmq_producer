@@ -1,0 +1,108 @@
+ import com.rabbitmq.client.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+ 
+ public class producerByExchange {
+    private final static String EXCHANGE_NAME = "xnamelist.alarm";
+    private final static String QUEUE_NAME = "xnamelist.alarm.xnamelist-alarm";
+    private final static String QUEUE_IP = "10.66.186.61";
+    //    private final static String QUEUE_IP = "10.66.193.3";
+    private final static int QUEUE_PORT = 6005;//RabbitMQ对外服务端口
+    //    private final static int QUEUE_PORT = 5673;//RabbitMQ对外服务端口
+    private final static String QUEUE_USER = "maoyeqin";
+    private final static String QUEUE_PWD = "maoyeqin";
+//    private final static String QUEUE_USER = "admin";
+//    private final static String QUEUE_PWD = "admin";
+    private final static String msgFilePath = "D:\\code\\rabbitmqClient\\rmqMsg.txt";
+    private final static String ROUTING_KEY = "alarm";
+    private final static String exchangeType = "direct";
+    private static Connection connection = null;
+    private static Channel channel = null;
+    private static String message = new fileRead().readToString(msgFilePath);
+
+    private static final String[] SEVERITIES = { "info", "warning", "error" };
+
+    public static void main(String[] argv) throws java.io.IOException, TimeoutException {
+        producerByExchange(EXCHANGE_NAME, QUEUE_IP, ROUTING_KEY);
+        for(int i=1; i<1500; i++) {
+            produce(EXCHANGE_NAME,ROUTING_KEY,msgFilePath);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        close();
+
+    }
+
+    private static Logger logger = LoggerFactory.getLogger(producerByExchange.class);
+    public static void producerByExchange(String EXCHANGE_NAME,String QUEUE_IP ,String routingKey) throws IOException, TimeoutException {
+        /**
+         * 创建连接连接到MabbitMQ
+         */
+        try {
+                ConnectionFactory factory = new ConnectionFactory();
+                factory.setHost(QUEUE_IP);
+                factory.setPort(QUEUE_PORT);// MQ端口
+                factory.setUsername(QUEUE_USER);// MQ用户名
+                factory.setPassword(QUEUE_PWD);// MQ密码
+                //创建一个连接
+                connection = factory.newConnection();
+                //创建一个频道
+                channel = connection.createChannel();
+
+                AMQP.Queue.DeclareOk queueOk = channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+                // 声明direct类型转发器
+                AMQP.Exchange.DeclareOk exchangeOk = channel.exchangeDeclare(EXCHANGE_NAME, exchangeType, true, false, null);
+                // 用于监听不可达的消息
+                channel.addReturnListener(new ReturnListener() {
+                    @Override
+                    public void handleReturn(int replyCode, String replyText,
+                                             String exchange, String routingKey,
+                                             AMQP.BasicProperties properties, byte[] body) throws IOException {
+
+                        System.out.println("======= handle ======= return ========");
+                        System.out.println("replyCode: " + replyCode);
+                        System.out.println("replyText: " + replyText);
+                        System.out.println("exchange: " + exchange);
+                        System.out.println("routingKey: " + routingKey);
+                        System.out.println("properties: " + properties);
+                        System.out.println("body: " + new String(body));
+
+                    }
+                });
+
+                //发送的消息
+//                String queueName = channel.queueDeclare().getQueue();
+                System.out.println(QUEUE_NAME);
+                // 指定binding_key
+                channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, routingKey);
+            } catch (TimeoutException e) {
+            logger.error(e.getMessage(), e);
+        }
+
+    }
+
+    public static void produce(String exchange, String routingKey,String MsgFilePath) throws IOException, TimeoutException {
+
+        //往队列中发出一条消息
+        Long start = System.currentTimeMillis();
+        //将消息保存起来，重启rabbit后待消费的消息不会被删除
+        channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes());
+        System.out.println("发送完成, 耗时：" + (System.currentTimeMillis() - start));
+        System.out.print("msg len:" + message.length());
+        logger.info("发送完成, 耗时：" + (System.currentTimeMillis() - start));
+
+
+    }
+
+    public static void close() throws IOException, TimeoutException {
+        //关闭频道和连接
+        channel.close();
+        connection.close();
+    }
+}
